@@ -1,15 +1,31 @@
+/*
+ * Author£ºJarvis
+ * Date£º2020.10.21
+ * Class£º17µç×ÓĞÅÏ¢¹¤³Ì1 
+ * Num£ºXb17610107
+*/
+
+/*
+ * Description£º×ÓÀàCar,¼Ì³Ğ¸¸ÀàVehicle
+ * 
+*/
+
 package Rent_car_system;
 
-public final class Car extends Vehicle {// ç±»çš„ä¼˜åŒ–è®¾è®¡ï¼Œå°†è½¿è½¦è®¾è®¡ä¸ºfinalç±»ï¼Œä¸å…è®¸æœ‰å­ç±»
-	private String type;
+import java.util.List;
+import java.util.Scanner;
 
-	public Car() {// å­ç±»è½¿è½¦ç±»çš„æ— å‚æ„é€ å‡½æ•°
+public final class Car extends Vehicle {// ×ÓÀàCar¼Ì³Ğ¼Ì³Ğ¸¸ÀàVehicle£¬finalÏŞÖÆCar²»ÄÜÓĞ×ÓÀà
+	static final int start = 0;
+	static final int end = 7;
+	private String type;// Car¶ÀÓĞµÄtypeÀà
 
+	public Car(String no, String brand, String mtype, String type, int state) {// CarµÄÓĞ²Î¹¹Ôìº¯Êı£¬×ªÈë²ÎÊıÎª³µÅÆ¡¢Æ·ÅÆ¡¢ÀàĞÍ¡¢ĞÍºÅ¡¢×âÁŞ×´Ì¬
+		super(no, brand, mtype, state);// µ÷ÓÃ¸¸ÀàVehicleµÄ¹¹Ôìº¯Êı£¬±ØĞëÒªĞ´
+		this.type = type;
 	}
 
-	public Car(String no, String brand, String type) {
-		super(no, brand);
-		this.type = type;
+	public Car() {// CarµÄÎŞ²Î¹¹Ôìº¯Êı
 	}
 
 	public String getType() {
@@ -20,13 +36,72 @@ public final class Car extends Vehicle {// ç±»çš„ä¼˜åŒ–è®¾è®¡ï¼Œå°†è½¿è½¦è®¾è®¡ä
 		this.type = type;
 	}
 
-	public int calrent(int days) {// å¯¹çˆ¶ç±»çš„æ–¹æ³•é‡å†™
+	public int calrent(int days) {// Õë¶ÔCarÀàÖØĞ´¸¸ÀàµÄcalrentº¯Êı
 		if ("1".equals(type)) {
-			return days * 500;
+			return days * 500;// ±¦Âí550iµÄ×â½ğ
 		} else if ("2".equals(type)) {
-			return days * 600;
-		} else {
-			return days * 300;
-		}
+			return days * 600;// ±ğ¿ËÉÌÎñ²ÕGL8µÄ×â½ğ
+		} else if ("3".equals(type)) {
+			return days * 300;// ±ğ¿ËÁÖÒñ´óµÀµÄ×â½ğ
+		} else
+			return 0;
 	}
+
+	@Override
+	public void print() {
+		super.print();
+	}
+
+	@Override
+	public void input(String brand, String mtype, int money, int days, List<Vehicle> vehicles, List<Customer> orders,
+			Customer p1) {// Õë¶ÔCarÀàÖØĞ´¸¸ÀàµÄinputº¯Êı
+		super.input(brand, mtype, money, days, vehicles, orders, p1);// ¸¸ÀàµÄinputº¯Êı
+		mtype = "½Î³µ";
+		@SuppressWarnings("resource")
+		Scanner input = new Scanner(System.in);
+		System.out.print("ÇëÊäÈëÒª×âÁŞµÄ½Î³µÆ·ÅÆ(1.±¦Âí		2.±ğ¿Ë):");
+		brand = input.next();
+		// Í³Ò»±êºÅÓëÆ·ÅÆ£¬½«Ô­À´ÊäÈëÎª12µÄbrandÖµ¸²¸Ç³É12¶ÔÓ¦µÄ¾ßÌå½Î³µÆ·ÅÆ£¬·½±ãºóÆÚ´òÓ¡
+		if ("1".equals(brand)) {// Ñ¡ÔñµÄÊÇ±¦Âí
+			brand = "±¦Âí";// Ô­À´"1"¸²¸Ç³É"±¦Âí"
+			System.out.print("ÇëÊäÈë½Î³µµÄĞÍºÅ(1.550i):");
+		} else {// Ñ¡ÔñµÄÊÇ±ğ¿Ë
+			brand = "±ğ¿Ë";// Ô­À´"2"¸²¸Ç³É"±ğ¿Ë"
+			System.out.print("ÇëÊäÈë½Î³µµÄĞÍºÅ(2.ÉÌÎñ²ÕGL8		3.ÁÖÒñ´óµÀ):");
+		}
+		type = input.next();
+		money = calrent(days);// ¼ÆËã×â½ğ
+		// Í³Ò»±êºÅÓëĞÍºÅ£¬½«Ô­À´ÊäÈëÎª123µÄtypeÖµ¸²¸Ç³É123¶ÔÓ¦µÄ¾ßÌå½Î³µĞÍºÅ£¬·½±ãºóÆÚ´òÓ¡
+		switch (type) {
+		case "1":
+			type = "550i";// Ô­À´"1"¸²¸Ç³É"550i"
+			break;
+		case "2":
+			type = "ÉÌÎñ²ÕGL8";// Ô­À´"2"¸²¸Ç³É"ÉÌÎñ²ÕGL8"
+			break;
+		case "3":
+			type = "ÁÖÒñ´óµÀ";// Ô­À´"3"¸²¸Ç³É"ÁÖÒñ´óµÀ"
+			break;
+		default:
+			System.out.print("²éÎŞ´Ë³µ£¡£¡£¡");
+			break;
+		}
+		for (int i = start; i < end; i++) {// ¿ªÊ¼±éÀúvehicles£¬ÕÒµ½·ûºÏÌõ¼şµÄ½Î³µ²¢´òÓ¡
+			Car temp = (Car) vehicles.get(i);
+			if ((temp.getType().equals(type)) && (temp.getState() == 0)) {
+				vehicles.get(i).setState(1);
+				p1.setNo(temp.getNo());// ½«»ñµÃµÄÅÆºÅ±£´æ½ø¹ºÎï³µ±äÁ¿p1Àï
+				break;
+			} else
+				;
+		}
+
+		p1.setBrand(brand);
+		p1.setDays(days);
+		p1.setMtype(mtype);
+		p1.setMoney(money);
+		p1.setType(type);
+		orders.add(p1);// ½«ÕÒµ½µÄ½Î³µÌí¼Ó½ø¹ºÎï³µÖĞ
+	}
+
 }

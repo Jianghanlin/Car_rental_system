@@ -1,16 +1,41 @@
+/*
+ * Author£ºJarvis
+ * Date£º2020.10.21
+ * Class£º17µç×ÓĞÅÏ¢¹¤³Ì1 
+ * Num£ºXb17610107
+*/
+
+/*
+ * Description£º¸¸ÀàÆû³µÀà
+ * 
+*/
 package Rent_car_system;
 
-public abstract class Vehicle {//ç±»çš„ä¼˜åŒ–è®¾è®¡ï¼Œå°†æ±½è½¦è®¾è®¡ä¸ºæŠ½è±¡ç±»ï¼Œä¸å…è®¸å®ä¾‹åŒ–
-	private String no;
-	private String brand;
+import java.util.List;
 
-	public Vehicle() {// çˆ¶ç±»æ±½è½¦çš„æ— å‚æ„é€ å‡½æ•°
+public abstract class Vehicle {// ¸¸ÀàVehicle
+	private String no;// Æû³µÅÆºÅ
+	private String brand;// Æû³µÆ·ÅÆ
+	private String mtype;// Æû³µÀàĞÍ
+	private int state;// ×âÁŞ×´Ì¬
+
+	public Vehicle() {// ¸¸ÀàµÄÎŞ²Î¹¹Ôìº¯Êı
 
 	}
 
-	public Vehicle(String no, String brand) {
+	public Vehicle(String no, String brand, String mtype, int state) {// ¸¸ÀàµÄÓĞ²Î¹¹Ôìº¯Êı
 		this.no = no;
 		this.brand = brand;
+		this.mtype = mtype;
+		this.state = state;
+	}
+
+	public String getMtype() {
+		return mtype;
+	}
+
+	public void setMtype(String mtype) {
+		this.mtype = mtype;
 	}
 
 	public String getNo() {
@@ -27,6 +52,22 @@ public abstract class Vehicle {//ç±»çš„ä¼˜åŒ–è®¾è®¡ï¼Œå°†æ±½è½¦è®¾è®¡ä¸ºæŠ½è±¡ç±
 
 	public void setBrand(String brand) {
 		this.brand = brand;
+	}
+
+	public int getState() {
+		return state;
+	}
+
+	public void setState(int state) {
+		this.state = state;
+	}
+
+	public void input(String brand, String mtype, int money, int days, List<Vehicle> vehicles, List<Customer> orders,
+			Customer obj1) {// ¸¸ÀàµÄinputº¯Êı£¬Ã»ÓĞº¯ÊıÌå£¬±»¼Ì³ĞµÄ×ÓÀàÖØĞ´
+	}
+
+	public void print() {
+
 	}
 
 	public abstract int calrent(int days);

@@ -1,14 +1,38 @@
+/*
+ * Author£ºJarvis
+ * Date£º2020.10.21
+ * Class£º17µç×ÓĞÅÏ¢¹¤³Ì1 
+ * Num£ºXb17610107
+*/
+
+/*
+ * Description£º×ÓÀàTruck,¼Ì³Ğ¸¸ÀàVehicle
+ * 
+*/
+
 package Rent_car_system;
 
-public final class Truck extends Vehicle {
+import java.util.List;
+import java.util.Scanner;
+
+public final class Truck extends Vehicle {// ×ÓÀàTruck¼Ì³Ğ¼Ì³Ğ¸¸ÀàVehicle£¬finalÏŞÖÆTruck²»ÄÜÓĞ×ÓÀà
+	static final int start = 12;
 	private int tone;
 
-	public Truck() {// å­ç±»å¡è½¦ç±»çš„æ— å‚æ„é€ å‡½æ•°
+	public Truck() {// TruckµÄÎŞ²Î¹¹Ôìº¯Êı
 
 	}
 
-	public Truck(String no, String brand, int tone) {
-		super(no, brand);
+	public Truck(String no, String brand, String mtype, int tone, int state) {// TruckµÄÓĞ²Î¹¹Ôìº¯Êı£¬×ªÈë²ÎÊıÎª³µÅÆ¡¢Æ·ÅÆ¡¢ÀàĞÍ¡¢¶ÖÊı¡¢×âÁŞ×´Ì¬
+		super(no, brand, mtype, state);// µ÷ÓÃ¸¸ÀàVehicleµÄ¹¹Ôìº¯Êı£¬±ØĞëÒªĞ´
+		this.tone = tone;
+	}
+
+	public int getTone() {
+		return tone;
+	}
+
+	public void setTone(int tone) {
 		this.tone = tone;
 	}
 
@@ -20,7 +44,44 @@ public final class Truck extends Vehicle {
 		this.tone = tone;
 	}
 
-	public int calrent(int days) {// å¯¹çˆ¶ç±»çš„æ–¹æ³•é‡å†™
-		return tone * days * 50;
+	public int calrent(int days) {// Õë¶ÔTruckÀàÖØĞ´¸¸ÀàµÄcalrentº¯Êı
+		return tone * days * 50;// ×â½ğ=¶ÖÊı*ÌìÊı*50
+	}
+
+	@Override
+	public void input(String brand, String mtype, int money, int days, List<Vehicle> vehicles, List<Customer> orders,
+			Customer p1) {// Õë¶ÔTruckÀàÖØĞ´¸¸ÀàµÄinputº¯Êı
+		super.input(brand, mtype, money, days, vehicles, orders, p1);// ¸¸ÀàµÄinputº¯Êı
+		mtype = "¿¨³µ";
+		@SuppressWarnings("resource")
+		Scanner input = new Scanner(System.in);
+		System.out.print("ÊäÈëÒª×âÁŞµÄ¿¨³µÆ·ÅÆ(1.ÖØÆû		2.½â·Å):");
+		brand = input.next();
+		System.out.print("ÇëÊäÈë¶ÖÊı(10¡¢20¡¢40¡¢50):");
+		tone = input.nextInt();
+		// Í³Ò»±êºÅÓëÆ·ÅÆ£¬½«Ô­À´ÊäÈëÎª12µÄbrandÖµ¸²¸Ç³É12¶ÔÓ¦µÄ¾ßÌå¿¨³µÆ·ÅÆ£¬·½±ãºóÆÚ´òÓ¡
+		if ("1".equals(brand)) {
+			brand = "ÖØÆû";// Ô­À´"1"¸²¸Ç³É"ÖØÆû"
+		} else if ("2".equals(brand)) {
+			brand = "½â·Å";// Ô­À´"2"¸²¸Ç³É"½â·Å"
+		} else {
+			System.out.print("²éÎŞ´Ë³µ£¡£¡£¡");
+		}
+		for (int i = start; i < vehicles.size(); i++) {// ¿ªÊ¼±éÀúvehicles£¬ÕÒµ½·ûºÏÌõ¼şµÄ¿¨³µ²¢´òÓ¡
+			Truck temp = (Truck) vehicles.get(i);
+			if ((temp.getState() == 0) && (temp.gettone() == tone)) {
+				vehicles.get(i).setState(1);
+				p1.setNo(temp.getNo());// ½«»ñµÃµÄÅÆºÅ±£´æ½ø¹ºÎï³µ±äÁ¿p1Àï
+				break;
+			}
+		}
+		money = calrent(days);// ¼ÆËã×â½ğ
+		p1.setBrand(brand);
+		p1.setDays(days);
+		p1.setMtype(mtype);
+		p1.setMoney(money);
+		p1.setType("¿Õ");// ÒòÎª¿¨³µÃ»ÓĞĞÍºÅ£¬µ«ÊÇ×îºó´òÓ¡ÓĞĞÍºÅÒ»ÁĞ£¬ËùÒÔ¸³ÖµÎª¿Õ
+		p1.setSeatcount(tone);
+		orders.add(p1);// ½«ÕÒµ½µÄÆû³µÌí¼Ó½ø¹ºÎï³µÖĞ
 	}
 }

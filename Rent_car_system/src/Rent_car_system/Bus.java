@@ -1,11 +1,68 @@
+/*
+ * Author£ºJarvis
+ * Date£º2020.10.21
+ * Class£º17µç×ÓĞÅÏ¢¹¤³Ì1 
+ * Num£ºXb17610107
+*/
+
+/*
+ * Description£º×ÓÀàBus,¼Ì³Ğ¸¸ÀàVehicle
+ * 
+*/
+
 package Rent_car_system;
 
-public final class Bus extends Vehicle {// ç±»çš„ä¼˜åŒ–è®¾è®¡ï¼Œå°†å®¢è½¦è®¾è®¡ä¸ºfinalç±»ï¼Œä¸å…è®¸æœ‰å­ç±»
-	private int seatcount;
+import java.util.List;
+import java.util.Scanner;
 
-	public Bus(String no, String brand,int seatcount) {
-		super(no,brand);
+public final class Bus extends Vehicle {// ×ÓÀàBus¼Ì³Ğ¼Ì³Ğ¸¸ÀàVehicle£¬finalÏŞÖÆBus²»ÄÜÓĞ×ÓÀà
+	static final int start = 8;
+	static final int end = 11;
+	private int seatcount;// Bus¶ÀÓĞµÄseatcountÀà
+
+	public Bus() {// BusµÄÎŞ²Î¹¹Ôìº¯Êı
+
+	}
+
+	public Bus(String no, String brand, String mtype, int seatcount, int state) {// BusµÄÓĞ²Î¹¹Ôìº¯Êı£¬×ªÈë²ÎÊıÎª³µÅÆ¡¢Æ·ÅÆ¡¢ÀàĞÍ¡¢×ùÎ»ºÅ¡¢×âÁŞ×´Ì¬
+		super(no, brand, mtype, state);// µ÷ÓÃ¸¸ÀàVehicleµÄ¹¹Ôìº¯Êı£¬±ØĞëÒªĞ´
 		this.seatcount = seatcount;
+	}
+
+	@Override
+	public void input(String brand, String mtype, int money, int days, List<Vehicle> vehicles, List<Customer> orders,
+			Customer p1) {// Õë¶ÔBusÀàÖØĞ´¸¸ÀàµÄinputº¯Êı
+		super.input(brand, mtype, money, days, vehicles, orders, p1);// ¸¸ÀàµÄinputº¯Êı
+		mtype = "¿Í³µ";
+		@SuppressWarnings("resource")
+		Scanner input = new Scanner(System.in);
+		System.out.print("ÇëÊäÈëÒª×âÁŞµÄ¿Í³µÆ·ÅÆ(1.½ğ±­		2.½ğÁú):");
+		brand = input.next();
+		// Í³Ò»±êºÅÓëÆ·ÅÆ£¬½«Ô­À´ÊäÈëÎª12µÄbrandÖµ¸²¸Ç³É12¶ÔÓ¦µÄ¾ßÌå¿Í³µÆ·ÅÆ£¬·½±ãºóÆÚ´òÓ¡
+		if ("1".equals(brand)) {
+			brand = "½ğ±­";// Ô­À´"1"¸²¸Ç³É"½ğ±­"
+		} else {
+			brand = "½ğÁú";// Ô­À´"2"¸²¸Ç³É"½ğÁú"
+		}
+		System.out.print("ÇëÊäÈë×ùÎ»Êı(15¡¢40¡¢50¡¢60):");
+		seatcount = input.nextInt();
+		for (int i = start; i <= end; i++) {// ¿ªÊ¼±éÀúvehicles£¬ÕÒµ½·ûºÏÌõ¼şµÄ¿Í³µ²¢´òÓ¡
+			Bus temp = (Bus) vehicles.get(i);
+			if ((temp.getBrand().equals(brand)) && (temp.getState() == 0) && (temp.getSeatcount() == seatcount)) {
+				vehicles.get(i).setState(1);
+				p1.setNo(temp.getNo());// ½«»ñµÃµÄÅÆºÅ±£´æ½ø¹ºÎï³µ±äÁ¿p1Àï
+				break;
+			} else
+				;
+		}
+		money = calrent(days);
+		p1.setBrand(brand);
+		p1.setDays(days);
+		p1.setMtype(mtype);
+		p1.setMoney(money);
+		p1.setType("¿Õ");// ÒòÎª¿Í³µÃ»ÓĞĞÍºÅ£¬µ«ÊÇ×îºó´òÓ¡ÓĞĞÍºÅÒ»ÁĞ£¬ËùÒÔ¸³ÖµÎª¿Õ
+		p1.setSeatcount(seatcount);
+		orders.add(p1);// ½«ÕÒµ½µÄÆû³µÌí¼Ó½ø¹ºÎï³µÖĞ
 	}
 
 	public int getSeatcount() {
@@ -16,15 +73,17 @@ public final class Bus extends Vehicle {// ç±»çš„ä¼˜åŒ–è®¾è®¡ï¼Œå°†å®¢è½¦è®¾è®¡ä
 		this.seatcount = seatcount;
 	}
 
-	public Bus() {// å­ç±»è½¿è½¦ç±»çš„æ— å‚æ„é€ å‡½æ•°
-
+	@Override
+	public void print() {
+		super.print();
 	}
 
-	public int calrent(int days) {// å¯¹çˆ¶ç±»çš„æ–¹æ³•é‡å†™
+	public int calrent(int days) {// Õë¶ÔBusÀàÖØĞ´¸¸ÀàµÄcalrentº¯Êı
 		if (seatcount <= 16) {
-			return days * 800;
+			return days * 800;// Ğ¡ÓÚµÈÓÚ16×ùµÄ×â½ğ
 		} else {
-			return days * 1500;
+			return days * 1500;// ´óÓÚ16×ùµÄ×â½ğ
 		}
 	}
+
 }

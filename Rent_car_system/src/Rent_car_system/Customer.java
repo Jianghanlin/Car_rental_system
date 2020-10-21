@@ -1,20 +1,75 @@
+/*
+ * Author：Jarvis
+ * Date：2020.10.21
+ * Class：17电子信息工程1 
+ * Num：Xb17610107
+*/
+
+/*
+ * Description：购物车类
+ * 
+*/
+
 package Rent_car_system;
 
 public class Customer {
-	String id;
 	String name;
+	String no;
+	String brand;
+	String mtype;
+	String type;
+	int seatcount;
+	int tone;
+	int days;
+	int money;
 
-	public Customer(String id, String name) {
-		this.id = id;
+	public Customer(String name, String no, String brand, String mtype, String type, int seatcount, int tone, int days,
+			int money) {
+		super();
 		this.name = name;
+		this.no = no;
+		this.brand = brand;
+		this.mtype = mtype;
+		this.type = type;
+		this.seatcount = seatcount;
+		this.tone = tone;
+		this.days = days;
+		this.money = money;
 	}
 
-	public String getId() {
-		return id;
+	public int getTone() {
+		return tone;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setTone(int tone) {
+		this.tone = tone;
+	}
+
+	public Customer() {
+	}
+
+	public int getSeatcount() {
+		return seatcount;
+	}
+
+	public void setSeatcount(int seatcount) {
+		this.seatcount = seatcount;
+	}
+
+	public String getMtype() {
+		return mtype;
+	}
+
+	public void setMtype(String mtype) {
+		this.mtype = mtype;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public String getName() {
@@ -25,15 +80,36 @@ public class Customer {
 		this.name = name;
 	}
 
-	public int cal_total_rent(Vehicle motos[], int days) {
-		int sum = 0;
-		for (int i = 0; i < motos.length; i++) {
-			if (motos[i] == null)
-				break;
-			else {
-				sum += motos[i].calrent(days);
-			}
-		}
-		return sum;
+	public String getNo() {
+		return no;
 	}
+
+	public void setNo(String no) {
+		this.no = no;
+	}
+
+	public String getBrand() {
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+
+	public int getDays() {
+		return days;
+	}
+
+	public void setDays(int days) {
+		this.days = days;
+	}
+
+	public int getMoney() {
+		return money;
+	}
+
+	public void setMoney(int money) {
+		this.money = money;
+	}
+
 }

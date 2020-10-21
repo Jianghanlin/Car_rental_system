@@ -1,35 +1,22 @@
+/*
+ * Author£ºJarvis
+ * Date£º2020.10.21
+ * Class£º17µç×ÓĞÅÏ¢¹¤³Ì1 
+ * Num£ºXb17610107
+*/
+
+/*
+ * Description£ºÖ÷º¯ÊıÀà
+ * 
+ *  
+ * 
+*/
+
 package Rent_car_system;
 
-public class Main {
-
+public class Main {// Ö÷º¯Êı
 	public static void main(String[] args) {
-		int days=0;// ç§Ÿèµå¤©æ•°
-		int totalrent=0;// æ€»ç§Ÿé‡‘è´¹ç”¨
-		// 1ã€å®¢æˆ·ç§Ÿèµçš„å¤šè¾†æ±½è½¦ä¿¡æ¯å’Œç§Ÿèµå¤©æ•°
-		Vehicle motos[] = new Vehicle[4];
-		motos[0] = new Car("æµ™0000", "å®é©¬", "550i");
-		motos[1] = new Car("æµ™0001", "å®é©¬", "550i");
-		motos[2] = new Car("æµ™0002", "åˆ«å…‹", "æ—è«å¤§é“");
-		motos[3] = new Bus("æµ™0003", "é‡‘é¾™", 34);
-		days = 5;
-		// 2ã€è®¡ç®—æ€»ç§Ÿèµè´¹ç”¨
-		Customer customer = new Customer("Xb17610107", "æ±Ÿç€šæ—");
-		totalrent = customer.cal_total_rent(motos, days);
-		// è¾“å‡ºå®¢æˆ·å§“åå’Œæ€»ç§Ÿèµè´¹ç”¨
-		System.out.println("æ±½è½¦ç‰Œå·\t\tæ±½è½¦å“ç‰Œ");
-
-		for (int i = 0; i < motos.length; i++) {
-			if (motos[i] == null)
-				break;
-			else {
-				System.out.println(motos[i].getNo() + "\t\t" + motos[i].getBrand());
-			}
-		}
-		System.out.println("\nå®¢æˆ·å:" + customer.getName() + ",ç§Ÿèµå¤©æ•°" + days + ",ç§Ÿèµè´¹ç”¨" + totalrent + ".");
-		/*
-		 * // TODO Auto-generated method stub Vehicle_Manager s1 = new
-		 * Vehicle_Manager(); s1.menu();
-		 */
+		Vehicle_Manager vm = new Vehicle_Manager();// Æû³µ¹ÜÀíÀàµÄ¶ÔÏóvm
+		vm.menu();// µ÷ÓÃ·½·¨menu();
 	}
-
 }
