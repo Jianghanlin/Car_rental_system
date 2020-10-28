@@ -62,9 +62,9 @@ public abstract class Vehicle {// 父类Vehicle
 		this.state = state;
 	}
 
-	public abstract int input(String brand, String mtype, int money, int days, List<Vehicle> vehicles,
-			List<Customer> orders, // 父类的input函数，没有函数体，被继承的子类重写
-			Customer obj1);
+	public void input(String brand, String mtype, int money, int days, List<Vehicle> vehicles, List<Customer> orders,
+			Customer obj1) {// 父类的input函数，没有函数体，被继承的子类重写
+	}
 
 	public void print() {
 
