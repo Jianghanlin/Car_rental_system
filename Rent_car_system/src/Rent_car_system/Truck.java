@@ -28,14 +28,6 @@ public final class Truck extends Vehicle {// 子类Truck继承继承父类Vehicle，final
 		this.tone = tone;
 	}
 
-	public int getTone() {
-		return tone;
-	}
-
-	public void setTone(int tone) {
-		this.tone = tone;
-	}
-
 	public int gettone() {
 		return tone;
 	}
@@ -49,8 +41,7 @@ public final class Truck extends Vehicle {// 子类Truck继承继承父类Vehicle，final
 	}
 
 	@Override
-	public int input(String brand, String mtype, int money, int days, List<Vehicle> vehicles, List<Customer> orders,
-			Customer p1) {
+	public int input(String brand, String mtype, int money, int days, List<Vehicle> vehicles, List<Customer> orders, Customer p1) {
 		int scan = 1;
 		int num = 1;
 		// 针对Truck类重写父类的input函数
@@ -67,13 +58,6 @@ public final class Truck extends Vehicle {// 子类Truck继承继承父类Vehicle，final
 			brand = input.next();
 		}
 
-		System.out.print("请输入吨数(10、20、40、50):");
-		tone = input.nextInt();
-		while ((tone != 10) && (tone != 20) && (tone != 40) && (tone != 50)) {
-			System.out.print("！！没有这种吨数的车辆！！,请重新输入：！！");
-			tone = input.nextInt();
-		}
-
 		// 统一标号与品牌，将原来输入为12的brand值覆盖成12对应的具体卡车品牌，方便后期打印
 		if ("1".equals(brand)) {
 			brand = "重汽";// 原来"1"覆盖成"重汽"
@@ -82,11 +66,10 @@ public final class Truck extends Vehicle {// 子类Truck继承继承父类Vehicle，final
 			for (int i = 0; i < 20; i++)
 				System.out.print("-");
 			System.out.print("\n");
-			System.out.println("[序号]\t[汽车牌号]\t[汽车类型]\t[汽车品牌]\t[座位数]\t[租赁状态]");
+			System.out.println("[序号]\t[汽车牌号]\t[汽车类型]\t[汽车品牌]\t[吨数]\t[租赁状态]");
 			for (int i = 12; i <= 13; i++) {// 开始遍历vehicles，找到符合条件的轿车并打印
 				Truck temp = (Truck) vehicles.get(i);
-				System.out.printf("  %-8d%-15s%-15s%-12s%-15d\n", num, temp.getNo(), temp.getMtype(), temp.getBrand(),
-						temp.getState());
+				System.out.printf("  %-8d%-15s%-15s%-12s%-15d%-15d\n", num, temp.getNo(), temp.getMtype(), temp.getBrand(), temp.gettone(), temp.getState());
 				num++;
 			}
 
@@ -97,13 +80,19 @@ public final class Truck extends Vehicle {// 子类Truck继承继承父类Vehicle，final
 			for (int i = 0; i < 20; i++)
 				System.out.print("-");
 			System.out.print("\n");
-			System.out.println("[序号]\t[汽车牌号]\t[汽车类型]\t[汽车品牌]\t[座位数]\t[租赁状态]");
+			System.out.println("[序号]\t[汽车牌号]\t[汽车类型]\t[汽车品牌]\t[吨数]\t[租赁状态]");
 			for (int i = 14; i <= 15; i++) {// 开始遍历vehicles，找到符合条件的轿车并打印
 				Truck temp = (Truck) vehicles.get(i);
-				System.out.printf("  %-8d%-15s%-15s%-12s%-15d%-15d\n", num, temp.getNo(), temp.getMtype(),
-						temp.getBrand(), temp.gettone(), temp.getState());
+				System.out.printf("  %-8d%-15s%-15s%-12s%-15d%-15d\n", num, temp.getNo(), temp.getMtype(), temp.getBrand(), temp.gettone(), temp.getState());
 				num++;
 			}
+		}
+
+		System.out.print("请输入吨数(10、20、40、50):");
+		tone = input.nextInt();
+		while ((tone != 10) && (tone != 20) && (tone != 40) && (tone != 50)) {
+			System.out.print("！！没有这种吨数的车辆！！,请重新输入：！！");
+			tone = input.nextInt();
 		}
 
 		for (int i = start; i < vehicles.size(); i++) {// 开始遍历vehicles，找到符合条件的卡车并打印
